@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Programmierprojekt</title>
+        
+        <link rel="stylesheet" href="public/main.css">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+        
+        <script src="public/main.js" defer></script>
+        <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+        
+    </head>
+
+    <body> 
+        <h1>Programmierprojekt Routenplaner</h1>
+
+        <div id="map"></div>
+
+        <div id="allButtons">
+            <button id="get-btn" type="button" onclick="sendInfo()">Calculate Distance</button>
+            <button id="post-btn" type="button" onclick="clickedReset()">Reset</button>
+        </div>
+        <br>
+        
+        <h4>Set nodes:</h4>
+        <br>
+        <h4 id="startNode">Click on map to set the start node.</h4>
+        <br>
+        <h4 id="endNode">After you set the start node, click again on map to set the end node.</h4>
+        <br>
+
+        <h4>The distance is:  </h4>
+        <span id="amit"></span><br>
+        
+        
+        <br>
+
+
+        <footer>
+            <p>Navina Silatchom Mboute, Julia Onyems, Mara Schulte </p>
+        </footer>
+
+    </body>
+</html>
