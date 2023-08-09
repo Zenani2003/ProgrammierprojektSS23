@@ -2,3 +2,6 @@
 .project
 .settings/
 target/
+.vscode/
+germany.fmi
+toy.fmi.txt

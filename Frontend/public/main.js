@@ -20,6 +20,10 @@ var myFeatureLayer = L.layerGroup().addTo(map);
 var startNode = document.getElementById("startNode");
 var endNode = document.getElementById("endNode");
 var latlngs = Array();
+var startNodeLat;
+var startNodeLon;
+var endNodeLat;
+var endNodeLon;
 
 
 //Sets markers, popups, start and end Node when user clicks on the map.
@@ -31,6 +35,7 @@ function onMapClick(e) { // was ist eigentlich e ??
     
     //Set start and end node when clicking on the map - if they are not set yet
     if (startNode.innerHTML == "Click on map to set the start node."){
+        
         //Set marker
         markerMouseclick
         .setLatLng(e.latlng)
@@ -42,9 +47,14 @@ function onMapClick(e) { // was ist eigentlich e ??
         .openOn(myFeatureLayer);
         
         //write cords onto website
-        startNode.innerHTML = "Start Node is at: " + e.latlng.toString();
+        startNode.innerHTML = e.latlng.toString();
         //ForPolyline later
         latlngs.push(e.latlng);
+
+
+        //Save Latitude and Longitude in global variables to calculate distance later
+        startNodeLat = e.latlng.toString().substring(7, e.latlng.toString().indexOf(","));
+        startNodeLon = e.latlng.toString().substring(e.latlng.toString().indexOf(",")+2, e.latlng.toString().indexOf(")"));
 
     } else if (endNode.innerHTML == "After you set the start node, click again on map to set the end node."){
         //Set marker
@@ -58,12 +68,18 @@ function onMapClick(e) { // was ist eigentlich e ??
         .openOn(myFeatureLayer);
 
         //write cords onto website
-        endNode.innerHTML = "End Node is at: " + e.latlng.toString();
+        endNode.innerHTML = e.latlng.toString();
         //For Polylinelater
         latlngs.push(e.latlng);
 
         //Create polyline between start and end node
         setPolyline();
+
+
+        //Save Latitude and Longitude in global variables to calculate distance later
+        endNodeLat = e.latlng.toString().substring(7, e.latlng.toString().indexOf(","));
+        endNodeLon = e.latlng.toString().substring(e.latlng.toString().indexOf(",")+2, e.latlng.toString().indexOf(")"));
+
     } else {
         //If user tries to click more than twice on the map
         window.alert("Click the reset button to set new nodes.")
@@ -81,31 +97,31 @@ function setPolyline(){
 
 
 //TODO mithilfe von Backend stuff
-function SendInfo(){
-    const params = new URLSearchParams({startNode,endNode}); // maybe bekomme ich damit nacher ein mismatch
-    var url ="Pfad?val="+params; // welcher Pfad bzw Datei muss hier rein, wenn ich auf Graph klasse zugreifen will 
 
-    if(window.XMLHttpRequest){
-        var request= new XMLHttpRequest();
-        request.onreadystatechange=getInfo();
-        request.open("GET",url,true);
-        request.send();
+function sendInfo(){
+    if ((startNode.innerHTML != "Click on map to set the start node.") && (endNode.innerHTML != "After you set the start node, click again on map to set the end node.")) {
 
 
+        var url ="http://localhost:8000/dijkstra?start_long="+startNodeLon+"&start_lat="+startNodeLat+"&end_long="+endNodeLon+"&end_lat="+endNodeLat; // welcher Pfad bzw Datei muss hier rein
+
+        if(window.XMLHttpRequest){
+            var request= new XMLHttpRequest();
+            request.onreadystatechange=getInfo;
+            request.open("GET",url,true);
+            request.send();
+        }
+
+        function getInfo(){
+            if(request.readyState ==4){
+                var val = request.responseText;
+                // ich weiß nicht was hier passiert außerdem weiß ich nicht wo ich ausgabe hintun soll 
+                // was macht <span>'amit</span> weil das muss in html file noch rein   
+                document.getElementById('distance').innerHTML=val;
+            }
+        }
+    } else {
+        window.alert("You have to set the startnode and endnode first. (You set the startnode and endnode by clicking on the map.")
     }
-
-    function getInfo(){
-        if(request.readyState ==4){
-            var val = request.responseText();
-            // ich weiß nicht was hier passiert außerdem weiß ich nicht wo ich ausgabe hintun soll 
-            // was macht <span>'amit</span> weil das muss in html file noch rein   
-            document.getElementById('amit').innerHTML=val;
-          }
-    }
-
-       
-        
-    
 }
 
 //Reset everything - nodes, polyline, zoom, array, ... 
@@ -117,7 +133,5 @@ function clickedReset(){
     myFeatureLayer.clearLayers();
     map.setView([48.745837, 9.105398], 15);
 
-    window.alert("You reset the nodes. Please set new nodes");
+   
 }
-
-
