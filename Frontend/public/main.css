@@ -1,23 +1,23 @@
 html {
-    background: #e6e9e9;
+    background: #e3e8e8;
     background-image: linear-gradient(270deg, rgb(230, 233, 233) 0%, rgb(216, 221, 221) 100%);
     -webkit-font-smoothing: antialiased;
 }
 
 body {
-    background: #fff;
-    box-shadow: 0 0 2px rgba(0, 0, 0, 0.06);
-    color: #545454;
+    background: #f2eeee;
+    box-shadow: 0 0 2px hwb(0 79% 18% / 0.059);
+    color: #1a1919;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 16px;
     line-height: 1.5;
     margin: 0 auto;
-    max-width: 75%;
+    max-width: 100%;
     padding: 2em 2em 4em;
 }
 
 h1, h2, h3, h4, h5, h6 {
-    color: #222;
+    color: hsl(0, 0%, 2%);
     display: inline;
 }
 
@@ -42,11 +42,19 @@ button {
     height: 50px;
     float: right;
     margin-left: 10px;
+    background-color: hwb(0 39% 59%);
+    border-radius: 10px;
+    border-color: hwb(0 11% 89%);
+    
+    
 }
-
 footer{
-    background-color: #ccc7c7;
-    width: 75%; 
-    position: absolute; 
-    text-align: center;
+    position: fixed;
+   left: 0;
+   bottom: 0;
+   width: 75%;
+    background-color: hwb(0 57% 42%);
+    width: 100% ; 
+    position: left; 
+    
 }

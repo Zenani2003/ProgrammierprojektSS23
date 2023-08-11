@@ -28,7 +28,7 @@ public class Main {
         int[] edgeSrcs;
         int[] edgeTrgs;
         int[] edgeWeights;
-        String graphPath = "\\Users\\julia\\Downloads\\Programmierprojekt\\Ganze\\Backend\\programmierprojektSS\\germany.fmi";
+        String graphPath = "\\Users\\julia\\Downloads\\Programmierprojekt\\Ganze\\Backend\\programmierprojektSS\\toy.fmi.txt";
 
         try (BufferedReader reader = new BufferedReader(new FileReader(graphPath));) {
             String line;

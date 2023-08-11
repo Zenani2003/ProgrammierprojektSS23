@@ -1,3 +1,5 @@
+
+
 //var map = Karteanlegen(Welcher div Container).woIstDasZentrumDerKarte([Breitengrad, Längengrad], Zoomstufe (0 = ganze Welt))
 var map = L.map('map').setView([48.745837, 9.105398], 15);
 //Wie soll Karte aussehen = Mosaikbauteile
@@ -132,6 +134,8 @@ function clickedReset(){
     latlngs = [];
     myFeatureLayer.clearLayers();
     map.setView([48.745837, 9.105398], 15);
+
+    
 
    
 }
